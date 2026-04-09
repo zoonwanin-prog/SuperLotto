@@ -1,18 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Sarabun:wght@300;400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --gold: #c9a84c;
-  --gold-light: #f0d080;
-  --dark-bg: #0a0a0f;
-  --dark-card: #13131f;
-  --dark-border: #2a2a3a;
+  /* โทนสีหลัก SuperLotto Premium */
+  --primary: #0f172a;    /* น้ำเงินเข้มมาก (Slate 900) */
+  --accent: #eab308;     /* เหลืองทอง (Yellow 600) */
+  --secondary: #1e3a8a;  /* น้ำเงิน Royal Blue */
+  --bg-light: #f8fafc;   /* ขาวนวลสะอาดตา */
 }
 
-body {
-  background-color: var(--dark-bg);
-  font-family: 'Sarabun', sans-serif;
+@layer base {
+  body {
+    /* ล้างค่าสีดำเดิมออก และบังคับใช้สีขาวนวล */
+    background-color: var(--bg-light) !important;
+    color: var(--primary);
+    @apply text-[17px] antialiased min-h-screen;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-tight text-[#0f172a];
+  }
+}
+
+@layer components {
+  /* ปุ่มหลัก: เหลืองทองพรีเมียม */
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#eab308] to-[#ca8a04] text-white px-8 py-3.5 
+           rounded-2xl font-bold shadow-lg shadow-yellow-200/50 
+           hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+  }
+
+  /* ปุ่มรอง: น้ำเงินเข้มเรียบหรู */
+  .btn-secondary {
+    @apply bg-[#0f172a] text-white px-8 py-3.5 rounded-2xl font-bold 
+           hover:bg-[#1e293b] shadow-xl shadow-blue-900/10 
+           transition-all duration-200;
+  }
+
+  /* ช่องกรอกข้อมูล (Input) สไตล์ Apple-like */
+  .input-field {
+    @apply w-full bg-white border border-slate-200 p-4 rounded-2xl 
+           focus:border-[#1e3a8a] focus:ring-4 focus:ring-blue-100 
+           outline-none transition-all text-[17px] shadow-sm;
+  }
+
+  /* การ์ดเน้นความนูนเบาๆ (Soft UI) */
+  .premium-card {
+    @apply bg-white border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] 
+           backdrop-blur-sm rounded-[2rem] p-8;
+  }
+}
+
+/* ปรับแต่ง Scrollbar ให้ดูเรียบหรู */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
 }
