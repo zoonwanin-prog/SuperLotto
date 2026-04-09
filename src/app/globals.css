@@ -1,1 +1,57 @@
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* กำหนดค่าสีแบบ CSS Variables (เผื่อเรียกใช้นอก Tailwind) */
+  --primary: #1e3a8a;
+  --secondary: #facc15;
+  --background: #f8fafc;
+}
+
+@layer base {
+  body {
+    /* ตั้งค่าฟอนต์พื้นฐานเป็น 17px และใช้สีพื้นหลังขาวนวล */
+    @apply bg-slate-50 text-slate-900 text-[17px] antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+
+  /* ตั้งค่าหัวข้อให้ดูเด่นชัด */
+  h1, h2, h3, h4 {
+    @apply font-bold text-primary;
+  }
+}
+
+@layer components {
+  /* สร้าง Class สำเร็จรูปสำหรับปุ่ม (Component) */
+  .btn-primary {
+    @apply bg-primary text-secondary px-6 py-3 rounded-xl font-bold 
+           hover:bg-primary-dark transition-all active:scale-95 shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-primary px-6 py-3 rounded-xl font-bold 
+           hover:bg-secondary-dark transition-all active:scale-95 shadow-md;
+  }
+
+  /* ตกแต่ง Input ให้ดูพรีเมียมเหมือนกันทั้งเว็บ */
+  .input-field {
+    @apply w-full border-2 border-gray-100 p-3 rounded-xl 
+           focus:border-primary focus:ring-1 focus:ring-primary 
+           outline-none transition-all text-[17px];
+  }
+}
+
+/* ปรับแต่ง Scrollbar ให้ดูสวยงาม (Optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+}
