@@ -99,62 +99,128 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="premium-card w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-8 text-[#0f172a]">
-          {isLogin ? "เข้าสู่ระบบ" : "สมัครสมาชิก"}
-        </h2>
+    <div className="min-h-screen bg-slate-900 flex flex-col items-center p-4">
+      {/* Navbar เหมือนในรูป */}
+      <nav className="w-full max-w-7xl flex justify-between items-center py-4 text-white">
+        <div className="flex items-center gap-2">
+          {/* คุณสามารถใส่โลโก้ไอคอนได้ที่นี่ */}
+          <span className="text-xl font-bold">
+            <span className="text-white">Super</span>
+            <span className="text-amber-400">Lotto</span>
+          </span>
+        </div>
+        <button className="bg-amber-400 text-slate-900 px-4 py-1.5 rounded-md font-medium text-sm">
+          เข้าสู่ระบบ
+        </button>
+      </nav>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="username"
-            placeholder="Username"
-            className="input-field"
-            onChange={handleChange}
-            required
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            onChange={handleChange}
-            required
-          />
+      {/* กล่องหลักแบบผสมสีทอง-ขาว */}
+      <div className="w-full max-w-sm mt-10 md:mt-16 bg-white rounded-xl shadow-xl overflow-hidden">
+        {/* ส่วนบนสีทอง (Header) */}
+        <div className="bg-gradient-to-r from-amber-400 to-yellow-500 p-8 text-center text-slate-900">
+          <p className="text-xs tracking-widest uppercase opacity-80 mb-2">
+            THAILAND LOTTERY ONLINE
+          </p>
+          <h1 className="text-4xl font-extrabold mb-1">SuperLotto</h1>
+          <p className="text-sm opacity-90">ระบบมั่นคง · ปลอดภัย · จ่ายจริง 100%</p>
+        </div>
 
-          {!isLogin && (
-            <>
-              <div className="grid grid-cols-2 gap-4">
-                <input name="firstName" placeholder="ชื่อจริง" className="input-field" onChange={handleChange} required />
-                <input name="lastName" placeholder="นามสกุล" className="input-field" onChange={handleChange} required />
+        {/* ส่วนล่างสีขาว (Form) */}
+        <div className="p-6">
+          {/* ตัวเลือก เข้สู่ระบบ / สมัครสมาชิก */}
+          <div className="grid grid-cols-2 gap-px bg-slate-100 rounded-md mb-6 p-1 text-sm text-center">
+            <button
+              onClick={() => setIsLogin(true)}
+              className={`${isLogin ? "bg-white text-slate-900 shadow" : "text-slate-600"} p-2 rounded`}
+            >
+              เข้าสู่ระบบ
+            </button>
+            <button
+              onClick={() => setIsLogin(false)}
+              className={`${!isLogin ? "bg-white text-slate-900 shadow" : "text-slate-600"} p-2 rounded`}
+            >
+              สมัครสมาชิก
+            </button>
+          </div>
+
+          {/* Form */}
+          <form className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1">
+                ชื่อผู้ใช้
+              </label>
+              <div className="relative">
+                {/* ไอคอน */}
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                </span>
+                <input
+                  name="username"
+                  placeholder="กรอก Username"
+                  className="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-3 rounded-full text-sm focus:border-amber-400 focus:ring-1 focus:ring-amber-400 outline-none"
+                />
               </div>
-              <input name="phone" placeholder="เบอร์โทรศัพท์" className="input-field" onChange={handleChange} required />
-              
-              <select name="bankId" className="input-field" onChange={handleChange} required>
-                <option value="">เลือกธนาคาร</option>
-                {banks.map((bank) => (
-                  <option key={bank.id} value={bank.id}>{bank.name}</option>
-                ))}
-              </select>
-              
-              <input name="bankAcc" placeholder="เลขบัญชีธนาคาร" className="input-field" onChange={handleChange} required />
-            </>
-          )}
+            </div>
 
-          <button type="submit" disabled={loading} className="btn-primary w-full mt-4">
-            {loading ? "กำลังประมวลผล..." : isLogin ? "เข้าสู่ระบบ" : "สมัครสมาชิก"}
-          </button>
-        </form>
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1">
+                รหัสผ่าน
+              </label>
+              <div className="relative">
+                {/* ไอคอน */}
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </span>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="กรอก Password"
+                  className="w-full bg-slate-50 border border-slate-200 pl-12 pr-4 py-3 rounded-full text-sm focus:border-amber-400 focus:ring-1 focus:ring-amber-400 outline-none"
+                />
+              </div>
+            </div>
 
-        <p className="text-center mt-6 text-slate-500">
-          {isLogin ? "ยังไม่มีบัญชี?" : "มีบัญชีอยู่แล้ว?"}
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="ml-2 text-[#1e3a8a] font-bold hover:underline"
-          >
-            {isLogin ? "สมัครที่นี่" : "ล็อกอินที่นี่"}
+            <div className="text-right text-sm">
+              <a href="#" className="text-slate-500 hover:text-slate-700">
+                ลืมรหัสผ่าน?
+              </a>
+            </div>
+
+            {/* ปุ่มหลัก เข้าสู่ระบบ */}
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-slate-800 to-slate-950 text-white font-medium py-3 rounded-full text-sm shadow-md hover:from-slate-700 hover:to-slate-900 transition-all mt-4"
+            >
+              เข้าสู่ระบบ
+            </button>
+          </form>
+
+          {/* ตัวคั่น 'หรือ' */}
+          <div className="relative my-6 text-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <span className="relative bg-white px-3 text-xs text-slate-400 uppercase">
+              หรือ
+            </span>
+          </div>
+
+          {/* ปุ่มรอง สมัครสมาชิก */}
+          <button className="w-full bg-white text-slate-800 font-medium py-3 rounded-full text-sm border-2 border-slate-200 hover:bg-slate-50 transition-colors">
+            สมัครสมาชิกใหม่
           </button>
-        </p>
+
+          {/* ฟุตเตอร์เล็กด้านล่างสุด */}
+          <div className="flex justify-center gap-4 text-xs text-slate-400 mt-8">
+            <span>● SSL Secured</span>
+            <span>● จ่ายจริงทุกงวด</span>
+            <span>● 24/7 Support</span>
+          </div>
+        </div>
       </div>
     </div>
   );
