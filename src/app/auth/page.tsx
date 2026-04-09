@@ -71,29 +71,30 @@ export default function AuthPage() {
         if (authError) throw authError;
 
         if (authData.user) {
-          // 3. บันทึกลง Profiles (แก้ชื่อคอลัมน์ให้ตรงกับ Database ของคุณเป๊ะๆ)
-          const { error: profileError } = await supabase.from("profiles").insert([
-            {
-              id: authData.user.id,
-              username: formData.username.trim(),
-              first_name: formData.firstName,
-              last_name: formData.lastName,
-              phone_number: formData.phone,
-              bank_id: formData.bankId || null, // ส่ง UUID หรือ null
-              bank_account_number: formData.bankAcc,
-              balance: 0, // ยอดเงินเริ่มต้น
-            },
-          ]);
+  const profileData = {
+    id: authData.user.id,
+    username: formData.username.trim(),
+    first_name: formData.firstName,
+    last_name: formData.lastName,
+    phone_number: formData.phone,
+    // ตรวจสอบให้แน่ใจว่าได้รัน SQL เพิ่มคอลัมน์ด้านล่างนี้แล้ว
+    bank_id: formData.bankId || null,
+    bank_account_number: formData.bankAcc, 
+    balance: 0
+  };
 
-          if (profileError) {
-            // หากบันทึกโปรไฟล์ไม่สำเร็จ ให้แจ้งรายละเอียด (Error 400/500 จะมาโชว์ตรงนี้)
-            console.error("Profile Insert Error:", profileError);
-            throw new Error(`บันทึกข้อมูลไม่สำเร็จ: ${profileError.message}`);
-          }
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .insert([profileData]);
 
-          alert("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ");
-          setIsLogin(true);
-        }
+  if (profileError) {
+    console.error("รายละเอียด Error:", profileError); // ดูใน Console เพื่อหาจุดที่ชื่อคอลัมน์ไม่ตรง
+    throw new Error(`บันทึกข้อมูลไม่สำเร็จ: ${profileError.message}`);
+  }
+
+  alert("สมัครสมาชิกสำเร็จ!");
+  setIsLogin(true);
+}
       }
     } catch (err: any) {
       alert(err.message);
