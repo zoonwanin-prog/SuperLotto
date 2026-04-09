@@ -1,34 +1,21 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // *** เช็ค 3 บรรทัดนี้ให้ดี ถ้ามี src ต้องใส่ ./src/ นำหน้า ***
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      // เพิ่มโทนสีน้ำเงิน-เหลืองไว้เรียกใช้ได้ง่ายๆ (Optional)
       colors: {
-        // น้ำเงินเข้มที่คุณต้องการ
-        primary: {
-          DEFAULT: "#1e3a8a",
-          dark: "#172554",
-          light: "#3b82f6",
-        },
-        // เหลืองทองที่คุณต้องการ
-        secondary: {
-          DEFAULT: "#facc15",
-          dark: "#eab308",
-          light: "#fde047",
-        },
-      },
-      fontSize: {
-        // ตั้งค่า font size หลักเป็น 17px
-        base: ['17px', '26px'], 
+        primary: "#0f172a",
+        accent: "#eab308",
       },
     },
   },
   plugins: [],
 };
-
 export default config;
