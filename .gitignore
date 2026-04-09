@@ -1,0 +1,5 @@
+node_modules/
+.next/
+out/
+build/
+.env*.local    <-- สำคัญมาก! เพื่อไม่ให้ API Key หลุดไปใน GitHub
