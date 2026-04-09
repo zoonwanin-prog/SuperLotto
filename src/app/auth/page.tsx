@@ -8,15 +8,16 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false)
   const [banks, setBanks] = useState<{ id: string, name: string }[]>([])
 
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    bankId: '',
-    bankAcc: '',
-  })
+  const { error: profileError } = await supabase.from('profiles').insert([{
+  id: authData.user.id,
+  username: formData.username,
+  first_name: formData.firstName, // ตรวจสอบว่าใน SQL คือ first_name
+  last_name: formData.lastName,   // ตรวจสอบว่าใน SQL คือ last_name
+  phone_number: formData.phone,   // ตรวจสอบว่าใน SQL คือ phone_number
+  bank_id: formData.bankId,       // ตรวจสอบว่าใน SQL คือ bank_id
+  bank_account_number: formData.bankAcc,
+  balance: 0 
+}]);
 
   useEffect(() => {
     async function getBanks() {
