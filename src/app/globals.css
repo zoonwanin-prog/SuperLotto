@@ -1,51 +1,55 @@
+/* src/app/globals.css */
 
+/* 1. เชื่อมต่อ Tailwind Directive (สำคัญมาก ห้ามลบ) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 2. ตั้งค่าพื้นฐานสำหรับทั้งเว็บไซต์ */
 :root {
-  /* กำหนดค่าสีแบบ CSS Variables (เผื่อเรียกใช้นอก Tailwind) */
-  --primary: #1e3a8a;
-  --secondary: #facc15;
-  --background: #f8fafc;
+  --primary: #1e3a8a;    /* น้ำเงินเข้ม */
+  --secondary: #facc15;  /* เหลืองทอง */
+  --background: #f8fafc; /* ขาวนวล */
 }
 
 @layer base {
   body {
-    /* ตั้งค่าฟอนต์พื้นฐานเป็น 17px และใช้สีพื้นหลังขาวนวล */
+    /* บังคับใช้ขนาดฟอนต์ 17px และสีพื้นหลัง */
     @apply bg-slate-50 text-slate-900 text-[17px] antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 
-  /* ตั้งค่าหัวข้อให้ดูเด่นชัด */
-  h1, h2, h3, h4 {
-    @apply font-bold text-primary;
+  /* ตั้งค่าหัวข้อให้เป็นสีน้ำเงินเข้มอัตโนมัติ */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-[#1e3a8a];
   }
 }
 
+/* 3. สร้าง Class สำเร็จรูป (Custom Components) */
 @layer components {
-  /* สร้าง Class สำเร็จรูปสำหรับปุ่ม (Component) */
+  /* ปุ่มหลักสีเหลืองทอง */
   .btn-primary {
-    @apply bg-primary text-secondary px-6 py-3 rounded-xl font-bold 
-           hover:bg-primary-dark transition-all active:scale-95 shadow-md;
+    @apply bg-[#facc15] text-[#1e3a8a] px-8 py-3 rounded-2xl font-bold 
+           hover:bg-[#eab308] transition-all active:scale-95 shadow-lg shadow-yellow-100;
   }
 
-  .btn-secondary {
-    @apply bg-secondary text-primary px-6 py-3 rounded-xl font-bold 
-           hover:bg-secondary-dark transition-all active:scale-95 shadow-md;
+  /* ปุ่มรองสีน้ำเงิน */
+  .btn-outline {
+    @apply border-2 border-[#1e3a8a] text-[#1e3a8a] px-8 py-3 rounded-2xl font-bold 
+           hover:bg-[#1e3a8a] hover:text-white transition-all active:scale-95;
   }
 
-  /* ตกแต่ง Input ให้ดูพรีเมียมเหมือนกันทั้งเว็บ */
+  /* ช่องกรอกข้อมูล (Input) */
   .input-field {
-    @apply w-full border-2 border-gray-100 p-3 rounded-xl 
-           focus:border-primary focus:ring-1 focus:ring-primary 
-           outline-none transition-all text-[17px];
+    @apply w-full border-2 border-gray-100 p-4 rounded-2xl 
+           focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] 
+           outline-none transition-all text-[17px] bg-white;
   }
 }
 
-/* ปรับแต่ง Scrollbar ให้ดูสวยงาม (Optional) */
+/* 4. ปรับแต่ง Scrollbar ให้ดูแพง (พรีเมียม) */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,5 +57,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+  @apply bg-[#1e3a8a]/20 rounded-full hover:bg-[#1e3a8a]/40 transition-colors;
 }
