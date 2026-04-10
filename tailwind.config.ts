@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin"; // อย่าลืม import plugin
 
 const config: Config = {
-  // *** เช็ค 3 บรรทัดนี้ให้ดี ถ้ามี src ต้องใส่ ./src/ นำหน้า ***
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,13 +9,26 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // เพิ่มโทนสีน้ำเงิน-เหลืองไว้เรียกใช้ได้ง่ายๆ (Optional)
-      colors: {
-        primary: "#0f172a",
-        accent: "#eab308",
+      // เพิ่ม Shadow ให้ Text
+      textShadow: {
+        sm: '0 1px 2px var(--tw-shadow-color)',
+        DEFAULT: '2px 2px 4px var(--tw-shadow-color)',
+        lg: '4px 4px 8px var(--tw-shadow-color)',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // เพิ่ม Plugin สำหรับ textShadow
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'shadow-text': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    }),
+  ],
 };
 export default config;
